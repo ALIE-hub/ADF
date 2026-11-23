@@ -7,10 +7,6 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "demo-adf31"
 		},
-		"LS_azureSQL_db_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_azureSQL_db'"
-		},
 		"LS_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://demosink13.dfs.core.windows.net/"
@@ -34,6 +30,10 @@
 		"TGR_EVENT_SIMPLE_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/c0359534-9942-4988-a629-dabc08765957/resourceGroups/Test/providers/Microsoft.Storage/storageAccounts/demosink13"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://adf-key1.vault.azure.net/"
 		}
 	},
 	"variables": {
@@ -1400,12 +1400,18 @@
 					"authenticationType": "SQL",
 					"userName": "[parameters('LS_azureSQL_db_properties_typeProperties_userName')]",
 					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_azureSQL_db_password')]"
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault1",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "sql-db-password"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/TGR_EVENT_SIMPLE')]",
@@ -1439,6 +1445,19 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_FILE_EVENT')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }
