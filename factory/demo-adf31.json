@@ -1,0 +1,22 @@
+{
+	"name": "demo-adf31",
+	"properties": {
+		"globalParameters": {
+			"email_recepient": {
+				"type": "string",
+				"value": "chaithanya.sajja41@gmail.com"
+			}
+		},
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true,
+			"isExplicitlySet": false
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2f00cb08-2c4f-4694-b628-45c72c476b81",
+		"tenantId": "157852f5-6830-492a-a7b1-c60de3d1fc77"
+	}
+}
