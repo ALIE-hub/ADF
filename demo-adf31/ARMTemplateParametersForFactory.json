@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "demo-adf31"
+		},
+		"LS_azureSQL_db_password": {
+			"value": ""
+		},
+		"LS_ADLS_properties_typeProperties_url": {
+			"value": "https://demosink13.dfs.core.windows.net/"
+		},
+		"LS_azureSQL_db_properties_typeProperties_server": {
+			"value": "demo-sql-db-server1.database.windows.net"
+		},
+		"LS_azureSQL_db_properties_typeProperties_database": {
+			"value": "demo_sql_db"
+		},
+		"LS_azureSQL_db_properties_typeProperties_userName": {
+			"value": "Chaithanya"
+		},
+		"TGR_EVENT_SIMPLE_properties_PL_FILE_EVENT_parameters_file_name": {
+			"value": "@triggerBody().fileName"
+		},
+		"TGR_EVENT_SIMPLE_properties_typeProperties_scope": {
+			"value": "/subscriptions/c0359534-9942-4988-a629-dabc08765957/resourceGroups/Test/providers/Microsoft.Storage/storageAccounts/demosink13"
+		}
+	}
+}
